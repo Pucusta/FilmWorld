@@ -1,0 +1,15 @@
+<div class="show-card" routerLink="/show/{{ show.id }}" (click)="navigateToMovie()">
+    <div class="show-card-img" style="background-image: url({{ show.poster_path }});">
+    </div>
+    <div class="show-card-footer">
+        <div class="show-card-title">
+            <h3>{{ show.name }}</h3>
+        </div>
+        <div class="show-card-year">
+            <span>First air date:</span><span>{{ show.first_air_date }}</span>
+        </div>
+        <div class="show-card-score">
+            <span>Score:</span><span>{{ show.vote_average }}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+.personview-container {
+    display: flex;
+    justify-content: center;
+}
+.personview {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    width: 900px;
+}
+.personview-image {
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-right: 10px;
+    padding-right: 15px;
+    flex: 5;
+}
+.personview-image img {
+    height: 100%;
+}
+.personiew-details {
+    font-family: system-ui;
+    padding-left: 15px;
+    flex: 7;
+}
+.personview-name h1 {
+    margin-top: 0;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    padding: 10px 0;
+}
+.personview-overview-cnt h2 {
+    border-bottom: 1px solid;
+    padding-bottom: 4px;
+}
+mat-tab-group {
+    text-align: center;
+}
+mat-tab-group p {
+    padding-top: 20px;
+}
+.movielist {
+    display: flex;
+    color: grey;
+    padding: 15px;
+    flex-wrap: wrap;
+    padding-top: 0;
+}
+.movielist-breadcrumb {
+    font-family: system-ui;
+    display: flex;
+    justify-content: space-between;
+    padding: 32px;
+    padding-bottom: 0;
+    padding-top: 17px;
+}
+.movielist-breadcrumb h2 {
+    margin: 0;
+}
+.button-container {
+    text-align: center;  
+}
+button {
+    font-size: 25px;
+}

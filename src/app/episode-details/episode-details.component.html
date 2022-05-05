@@ -1,0 +1,16 @@
+<div clas="episode-card" fxLayout="row">
+    <div class="episode-card-img">
+        <img [src]="episode.still_path" [alt]="episode.name">
+    </div>
+    <div class="episode-card-details" fxLayout="column">
+        <div class="episode-card-name">
+            <h3>Ep{{ episode.episode_number }} - {{ episode.name }}</h3>
+        </div>
+        <div class="episode-card-score">
+            <span>Score: {{ episode.vote_average }}</span>
+        </div>
+        <div class="episode-card-overview">
+            <span>{{ episode.overview }}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+.showview-container {
+    display: flex;
+    justify-content: center;
+}
+.showview {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    width: 900px;
+}
+.showview-image {
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-right: 10px;
+    padding-right: 15px;
+    flex: 5;
+}
+.showview-details {
+    font-family: system-ui;
+    padding-left: 15px;
+    flex: 7;
+}
+.showview-name h1 {
+    margin-top: 0;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    padding: 10px 0;
+}
+.showview-overview-cnt h2 {
+    border-bottom: 1px solid;
+    padding-bottom: 4px;
+}
+.showlist {
+    display: flex;
+    color: grey;
+    padding: 15px;
+    flex-wrap: wrap;
+    padding-top: 0;
+}
+.showlist-breadcrumb {
+    font-family: system-ui;
+    display: flex;
+    justify-content: space-between;
+    padding: 32px;
+    padding-bottom: 0;
+    padding-top: 17px;
+}
+.showlist-breadcrumb h2 {
+    margin: 0;
+}
+.button-container {
+    text-align: center;  
+}
+button {
+    font-size: 25px;
+}
+.seasons {
+    font-family: system-ui;
+    margin-left: 30px;
+}
+.season-name {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 40px;
+}

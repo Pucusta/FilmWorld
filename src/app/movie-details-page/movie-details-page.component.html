@@ -1,0 +1,42 @@
+<div class="movieview-container">
+    <div class="movieview" fxLayout fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="30px">
+        <div class="movieview-image">
+            <img [src]="movie.poster_path" [alt]="movie.title">
+        </div>
+        <div class="movieview-details">
+            <div class="movieview-name">
+                <h1>{{ movie.title }} ({{ movie.release_year }})</h1>
+            </div>
+            <div style="padding: 5px 0;">
+                <span>Genres: </span>
+                <span *ngFor="let genre of movie.genres"> {{ genre.name }}</span>
+            </div>
+            <div style="padding: 5px 0;">
+                <span>Release date: {{ movie.release_date }}</span>
+            </div>
+            <div style="padding: 5px 0;">
+                <span>Runtime: {{ movie.runtime }}m</span>
+            </div>
+            <div style="padding: 5px 0;">
+                <span>Score: {{ movie.vote_average }}</span>
+            </div>
+            <div class="movieview-overview-cnt">
+                <h2>Overview</h2>
+                <div class="movie-overview">{{ movie.overview }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="movielist-cnt">
+    <div class="movielist-breadcrumb">
+        <div>
+            <h2>Similar movies</h2>
+        </div>
+    </div>
+    <div class="movielist">
+        <movie-details *ngFor="let movie of similarMovies" [movie-details]="movie"></movie-details>
+    </div>
+    <div class="button-container">
+        <button (click)="loadMovies()">More...</button>
+    </div>
+</div>

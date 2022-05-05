@@ -12,7 +12,16 @@ a:hover, a:active{
     padding: 0;
     margin: 0;
 }
- 
+
+.search {
+    margin-left: 40px;
+}
+
+.search input {
+    width: 250px;
+    height: 30px;
+}
+
 mat-toolbar{
     border-radius: 3px;
 }

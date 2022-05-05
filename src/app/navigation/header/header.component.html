@@ -7,6 +7,9 @@
     <div>
         <a routerLink="/home">Home</a>
     </div>
+    <div class="search">
+        <input type="search" placeholder="Search..." [(ngModel)]="searchTerm" (keyup.enter)="search()">
+    </div>
     <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
         <ul fxLayout fxLayoutGap="15px" class="navigation-items">
             <li>

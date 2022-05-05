@@ -1,0 +1,47 @@
+.episode-card {
+    border: 0px solid;
+    width: 251px;
+    height: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin: 50px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 1);
+}
+.episode-card-img {
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.episode-card-details {
+    padding: 15px;
+}
+.episode-card-footer {
+    border-radius: 5px;
+}
+.episode-card-name {
+    color: black;
+    font-family: system-ui;
+}
+.episode-card-name h3 {
+    margin-bottom: 7px;
+    margin-top: 2px;
+}
+.episode-card-overview {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    color: darkgray;
+    padding-top: 10px;
+}
+.episode-card-score {
+    font-weight: 500;
+    color: darkgray;
+    padding: 4px 0;
+}

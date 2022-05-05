@@ -1,0 +1,48 @@
+<div class="personview-container">
+    <div class="personview" fxLayout fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="10px">
+        <div class="personview-image">
+            <img [src]="person.profile_path" [alt]="person.name">
+        </div>
+        <div class="personview-details">
+            <div class="personview-name">
+                <h1>{{ person.name }}</h1>
+            </div>
+            <div style="padding: 5px 0;">
+                <span>Gender: {{ person.gender }}</span>
+            </div>
+            <div style="padding: 5px 0;">
+                <span>Born: {{ person.birthday }}</span>
+            </div>
+            <div style="padding: 5px 0;">
+                <span>Place of birth: {{ person.place_of_birth }}</span>
+            </div>
+            <div class="personview-biography-cnt">
+                <h2>Biography</h2>
+                <div class="person-biography">{{ person.biography }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="movielist-breadcrumb">
+    <div>
+        <h2>Known for:</h2>
+    </div>
+</div>
+<div>
+    <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="Movies"> 
+            <div class="movielist-cnt">
+                <div class="movielist">
+                    <movie-details *ngFor="let movie of movies" [movie-details]="movie"></movie-details>
+                </div>
+            </div> 
+        </mat-tab>
+        <mat-tab label="TV Shows">
+            <div class="movielist-cnt">
+                <div class="movielist">
+                    <show-details *ngFor="let show of shows" [show-details]="show"></show-details>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

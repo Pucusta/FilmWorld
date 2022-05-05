@@ -1,1 +1,13 @@
-<p>person-page works!</p>
+<div class="personlist-cnt">
+    <div class="personlist-breadcrumb">
+        <div>
+            <h2>Trending Actors</h2>
+        </div>
+    </div>
+    <div class="personlist">
+        <person-details *ngFor="let person of popularPeople" [person-details]="person"></person-details>
+    </div>
+    <div class="button-container">
+        <button (click)="loadPeople()">More...</button>
+    </div>
+</div>

@@ -1,1 +1,13 @@
-<p>show-page works!</p>
+<div class="showlist-cnt">
+    <div class="showlist-breadcrumb">
+        <div>
+            <h2>Trending TV shows</h2>
+        </div>
+    </div>
+    <div class="showlist">
+        <show-details *ngFor="let show of popularShows" [show-details]="show"></show-details>
+    </div>
+    <div class="button-container">
+        <button (click)="loadShows()">More...</button>
+    </div>
+</div>
