@@ -30,7 +30,8 @@ jsconfig.json\
 \
 # VSCode\
 # https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore\
-.vscode/\
+.vscode
+.vscode/
 !.vscode/settings.json\
 !.vscode/tasks.json\
 !.vscode/launch.json\
@@ -42,6 +43,7 @@ typings/\
 \
 # Misc\
 coverage/\
+node_modules
 node_modules/
 tmp/\
 npm-debug.log*\
