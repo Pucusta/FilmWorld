@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Genre } from '../models/genre.type';
-import { MovieDetails, Movie } from '../models/movie.type';
+import { MovieDetails, Movie, MovieCredits } from '../models/movie.type';
+import { Person } from '../models/person.type';
 import { Constants } from '../services/constants';
 import { MovieService } from '../services/movie.service';
 
@@ -15,6 +16,7 @@ export class MovieDetailsPageComponent implements OnInit {
   movie: Movie;
   movieId: number;
   similarMovies: Movie[] = [];
+  cast: Person[] = [];
   page: number = 1;
 
   constructor(private movieService: MovieService, private activatedRoute: ActivatedRoute) { }
@@ -35,6 +37,7 @@ export class MovieDetailsPageComponent implements OnInit {
       }
     );
     this.loadMovies();
+    this.loadCast();
   }
 
   loadMovies() {
@@ -52,6 +55,20 @@ export class MovieDetailsPageComponent implements OnInit {
       })) 
     );
     this.page++;
+  }
+
+  loadCast() {
+    this.movieService.getCredits(this.movieId).subscribe(
+      (credits : MovieCredits) => credits.cast.forEach(person => this.cast.push({
+        id: person.id,
+        name: person.name,
+        gender: person.gender == 1 ? 'woman' : 'man',
+        birthday: null,
+        biography: null,
+        place_of_birth: null,
+        profile_path: Constants.apiProfileUrl + person.profile_path
+      }))
+    )
   }
 
 }
