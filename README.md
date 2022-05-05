@@ -1,6 +1,7 @@
-# AngMaterialOwneraccount
+# FilmWorld
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
+This project is a homework for Client Side Technologies.
+It was was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
 
 ## Development server
 
