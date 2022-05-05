@@ -44,12 +44,12 @@ export interface PersonDetails {
 }
 
 export interface PersonCredits {
-    cast: Cast[];
+    cast: PersonCast[];
     crew: object[];
     id: number;
 }
 
-export interface Cast {
+export interface PersonCast {
     character: string;
     credit_id: string;
     release_date: string;

@@ -27,6 +27,16 @@
         </div>
     </div>
 </div>
+<div class="personlist-cnt">
+    <div class="personlist-breadcrumb">
+        <div>
+            <h2>Cast</h2>
+        </div>
+    </div>
+    <div class="personlist">
+        <person-details *ngFor="let person of cast" [person-details]="person"></person-details>
+    </div>
+</div>
 <div class="movielist-cnt">
     <div class="movielist-breadcrumb">
         <div>

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { MovieDetails, MoviePopular, MovieResult } from "../models/movie.type";
+import { MovieCredits, MovieDetails, MoviePopular, MovieResult } from "../models/movie.type";
 import { Constants } from "./constants";
 
 @Injectable()
@@ -23,5 +23,10 @@ export class MovieService{
     getSimilarMovies(id: number, page: number) : Observable<MovieResult>{
         let url = ''.concat(Constants.apiUrl, '/movie/', id.toString(), '/similar?api_key=', Constants.apiKey, '&page=', page.toString());
         return this.http.get<MovieResult>(url);
+    }
+
+    getCredits(id: number) : Observable<MovieCredits>{
+        let url = ''.concat(Constants.apiUrl, '/movie/', id.toString(), '/credits?api_key=', Constants.apiKey);
+        return this.http.get<MovieCredits>(url);
     }
 }
