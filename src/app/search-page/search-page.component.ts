@@ -25,7 +25,6 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => this.searchTerm = params.search_term);
-    console.log(this.searchTerm);
     this.loadMovies();
     this.loadShows();
     this.loadPeople();
