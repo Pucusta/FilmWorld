@@ -34,8 +34,9 @@ export class MovieDetailsPageComponent implements OnInit {
           genres : data.genres,
           overview : data.overview,
           vote_average : data.vote_average,
-          poster_path : Constants.apiPosterUrl + data.poster_path
+          poster_path : data.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + data.poster_path
         },
+        error: (error) => console.error(error),
         complete: () => this.checkIfSaved()
     });
     this.loadMovies();
@@ -43,8 +44,8 @@ export class MovieDetailsPageComponent implements OnInit {
   }
 
   loadMovies() {
-    this.movieService.getSimilarMovies(this.movieId, this.page).subscribe(
-      data => data.results.forEach(movie => this.similarMovies.push({
+    this.movieService.getSimilarMovies(this.movieId, this.page).subscribe({
+      next: data => data.results.forEach(movie => this.similarMovies.push({
         id : movie.id,
         title : movie.title,
         release_year : movie.release_date.substring(0, 4),
@@ -53,29 +54,30 @@ export class MovieDetailsPageComponent implements OnInit {
         genres : null,
         overview : movie.overview,
         vote_average : movie.vote_average,
-        poster_path : Constants.apiPosterUrl + movie.poster_path
-      })) 
-    );
+        poster_path : movie.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + movie.poster_path
+      })),
+      error: (error) => console.error(error)
+    });
     this.page++;
   }
 
   loadCast() {
-    this.movieService.getCredits(this.movieId).subscribe(
-      (credits : MovieCredits) => credits.cast.forEach(person => this.cast.push({
+    this.movieService.getCredits(this.movieId).subscribe({
+      next: (credits : MovieCredits) => credits.cast.forEach(person => this.cast.push({
         id: person.id,
         name: person.name,
         gender: person.gender == 1 ? 'woman' : 'man',
         birthday: null,
         biography: null,
         place_of_birth: null,
-        profile_path: Constants.apiProfileUrl + person.profile_path
-      }))
-    )
+        profile_path: person.profile_path == null ? "./assets/images/person_placeholder.jpeg" : Constants.apiProfileUrl + person.profile_path
+      })),
+      error: (error) => console.error(error)
+    })
   }
 
   checkIfSaved(){
     this.saved = this.saveService.isMovieSaved(this.movie);
-    console.log(this.saved);
     let saveButton = document.getElementById('saveButton');
     if (this.saved) saveButton.textContent = 'Saved';
     else document.getElementById('saveButton').textContent = 'Save';

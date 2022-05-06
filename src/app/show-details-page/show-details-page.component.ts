@@ -34,16 +34,17 @@ export class ShowDetailsPageComponent implements OnInit {
         overview: data.overview,
         num_of_episodes: data.number_of_episodes,
         num_of_seasons: data.number_of_seasons,
-        poster_path: Constants.apiPosterUrl + data.poster_path,
+        poster_path: data.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + data.poster_path,
         seasons: data.seasons
       },
+      error: (error) => console.error(error),
       complete: () => {
         this.checkIfSaved();
         this.show.seasons.forEach(
           season => this.showService.getSeason(this.showId, season.season_number).subscribe({
             next: (data : SeasonDetails) => seasonsLength = this.seasons.push(data),
             complete: () => this.seasons[seasonsLength - 1].episodes.forEach(
-              episode => episode.still_path = Constants.apiStillUrl + episode.still_path
+              episode => episode.still_path = episode.still_path == null ? "./assets/images/episode_placeholder.jpeg" : Constants.apiStillUrl + episode.still_path
             )
           })
         );}
@@ -52,8 +53,8 @@ export class ShowDetailsPageComponent implements OnInit {
   }
 
   loadShows(){
-    this.showService.getSimilarShows(this.showId, this.page).subscribe(
-      data => data.results.forEach(show => this.similarShows.push({
+    this.showService.getSimilarShows(this.showId, this.page).subscribe({
+      next: data => data.results.forEach(show => this.similarShows.push({
         id: show.id,
         name: show.name,
         first_air_date: show.first_air_date,
@@ -62,10 +63,11 @@ export class ShowDetailsPageComponent implements OnInit {
         overview: show.overview,
         num_of_episodes: null,
         num_of_seasons: null,
-        poster_path: Constants.apiPosterUrl + show.poster_path,
+        poster_path: show.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + show.poster_path,
         seasons: null
-      }))
-    );
+      })),
+      error: (error) => console.error(error)
+    });
     this.page++;
   }
 

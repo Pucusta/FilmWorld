@@ -20,8 +20,8 @@ export class ShowPageComponent implements OnInit {
   }
 
   loadShows(){
-    this.showService.getPopularShows(this.page).subscribe(
-      data => data.results.forEach(show => this.popularShows.push({
+    this.showService.getPopularShows(this.page).subscribe({
+      next: data => data.results.forEach(show => this.popularShows.push({
         id: show.id,
         name: show.name,
         first_air_date: show.first_air_date,
@@ -30,10 +30,11 @@ export class ShowPageComponent implements OnInit {
         overview: show.overview,
         num_of_episodes: null,
         num_of_seasons: null,
-        poster_path: Constants.apiPosterUrl + show.poster_path,
+        poster_path: show.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + show.poster_path,
         seasons: null
-      }))
-    );
+      })),
+      error: (error) => console.error(error)
+    });
     this.page++;
   }
 
