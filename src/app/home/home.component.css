@@ -10,6 +10,14 @@ section div + p{
     font-size: 20px; 
     padding-bottom: 20px; 
 }
+.list {
+    display: flex;
+    color: grey;
+    padding: 15px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 0;
+}
 mat-tab-group {
     text-align: center;
 }

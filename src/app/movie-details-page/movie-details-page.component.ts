@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Genre } from '../models/genre.type';
 import { MovieDetails, Movie, MovieCredits } from '../models/movie.type';
 import { Person } from '../models/person.type';
 import { Constants } from '../services/constants';
 import { MovieService } from '../services/movie.service';
+import { SaveService } from '../services/save.service';
 
 @Component({
   selector: 'app-movie-details-page',
@@ -18,13 +18,14 @@ export class MovieDetailsPageComponent implements OnInit {
   similarMovies: Movie[] = [];
   cast: Person[] = [];
   page: number = 1;
+  saved: boolean;
 
-  constructor(private movieService: MovieService, private activatedRoute: ActivatedRoute) { }
+  constructor(private movieService: MovieService, private saveService : SaveService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.movieId = params.id);
-    this.movieService.getMovie(this.movieId).subscribe(
-        (data : MovieDetails) => this.movie = {
+    this.movieService.getMovie(this.movieId).subscribe({
+        next: (data : MovieDetails) => this.movie = {
           id : data.id,
           title : data.title,
           release_year : data.release_date.substring(0, 4),
@@ -34,8 +35,9 @@ export class MovieDetailsPageComponent implements OnInit {
           overview : data.overview,
           vote_average : data.vote_average,
           poster_path : Constants.apiPosterUrl + data.poster_path
-      }
-    );
+        },
+        complete: () => this.checkIfSaved()
+    });
     this.loadMovies();
     this.loadCast();
   }
@@ -71,4 +73,22 @@ export class MovieDetailsPageComponent implements OnInit {
     )
   }
 
+  checkIfSaved(){
+    this.saved = this.saveService.isMovieSaved(this.movie);
+    console.log(this.saved);
+    let saveButton = document.getElementById('saveButton');
+    if (this.saved) saveButton.textContent = 'Saved';
+    else document.getElementById('saveButton').textContent = 'Save';
+  }
+
+  save(element) {
+    if (this.saved) {
+      this.saveService.removeMovie(this.movie);
+      element.textContent = 'Save';
+    } else {
+      this.saveService.saveMovie(this.movie);
+      element.textContent = 'Saved';
+    }
+    this.saved = !this.saved;
+  }
 }

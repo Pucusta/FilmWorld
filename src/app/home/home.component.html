@@ -3,17 +3,24 @@
         <p>Welcome to the Film World Application</p> 
     </div>
 
-    <p>This application provides general help with movie hunting.</p> 
+    <p>This application provides general help with movie hunting using The Movie Database API.</p> 
+    <h3>Your saved items:</h3>
 
     <mat-tab-group mat-stretch-tabs>
         <mat-tab label="Movies"> 
-          <p>popular movies</p> 
+          <div class="list">
+            <movie-details *ngFor="let movie of savedMovies" [movie-details]="movie"></movie-details>
+          </div>
         </mat-tab>
         <mat-tab label="TV Shows">
-          <p>popular tv shows</p>
+          <div class="list">
+            <show-details *ngFor="let show of savedShows" [show-details]="show"></show-details>
+          </div>
         </mat-tab>
         <mat-tab label="Actors">
-          <p>popular actors</p>
+          <div class="list">
+            <person-details *ngFor="let person of savedPeople" [person-details]="person"></person-details>
+          </div>
         </mat-tab>
     </mat-tab-group>
 </section>
