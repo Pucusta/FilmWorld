@@ -4,9 +4,8 @@ import { Movie } from '../models/movie.type';
 import { Person, PersonCredits, PersonDetails } from '../models/person.type';
 import { Show } from '../models/show.type';
 import { Constants } from '../services/constants';
-import { MovieService } from '../services/movie.service';
 import { PersonService } from '../services/person.service';
-import { ShowService } from '../services/show.service';
+import { SaveService } from '../services/save.service';
 
 @Component({
   selector: 'app-person-details-page',
@@ -19,13 +18,14 @@ export class PersonDetailsPageComponent implements OnInit {
   personId: number;
   movies: Movie[] = [];
   shows: Show[] = [];
+  saved: boolean;
 
-  constructor(private personService: PersonService, private activatedRoute: ActivatedRoute) { }
+  constructor(private personService: PersonService, private saveService : SaveService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.personId = params.id);
-    this.personService.getPerson(this.personId).subscribe(
-      (person : PersonDetails) => this.person = {
+    this.personService.getPerson(this.personId).subscribe({
+      next: (person : PersonDetails) => this.person = {
         id: person.id,
         name: person.name,
         gender: person.gender == 1 ? 'woman' : 'man',
@@ -33,8 +33,9 @@ export class PersonDetailsPageComponent implements OnInit {
         biography: person.biography,
         place_of_birth: person.place_of_birth,
         profile_path: Constants.apiProfileUrl + person.profile_path
-      }
-    );
+      },
+      complete: () => this.checkIfSaved()
+    });
     this.loadMovies();
     this.loadShows();
   }
@@ -72,4 +73,21 @@ export class PersonDetailsPageComponent implements OnInit {
     );
   }
 
+  checkIfSaved(){
+    this.saved = this.saveService.isPersonSaved(this.person);
+    let saveButton = document.getElementById('saveButton');
+    if (this.saved) saveButton.textContent = 'Saved';
+    else document.getElementById('saveButton').textContent = 'Save';
+  }
+
+  save(element) {
+    if (this.saved) {
+      this.saveService.removePerson(this.person);
+      element.textContent = 'Save';
+    } else {
+      this.saveService.savePerson(this.person);
+      element.textContent = 'Saved';
+    }
+    this.saved = !this.saved;
+  }
 }

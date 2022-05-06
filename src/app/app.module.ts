@@ -27,6 +27,7 @@ import { EpisodeDetailsComponent } from './episode-details/episode-details.compo
 import { FormsModule } from '@angular/forms';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SearchService } from './services/search.service';
+import { SaveService } from './services/save.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { SearchService } from './services/search.service';
     MovieService,
     PersonService,
     ShowService,
-    SearchService
+    SearchService,
+    SaveService
   ],
   bootstrap: [AppComponent]
 })

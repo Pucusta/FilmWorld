@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { MovieCredits, MovieDetails, MoviePopular, MovieResult } from "../models/movie.type";
+import { MovieCredits, MovieDetails, MovieResult } from "../models/movie.type";
 import { Constants } from "./constants";
 
 @Injectable()
