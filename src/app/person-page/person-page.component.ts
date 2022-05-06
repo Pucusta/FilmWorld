@@ -20,17 +20,18 @@ export class PersonPageComponent implements OnInit {
   }
 
   loadPeople() {
-    this.personService.getPopularPeople(this.page).subscribe(
-      data => data.results.forEach(person => this.popularPeople.push({
+    this.personService.getPopularPeople(this.page).subscribe({
+      next: data => data.results.forEach(person => this.popularPeople.push({
         id: person.id,
         name: person.name,
         gender: person.gender == 1 ? 'woman' : 'man',
         birthday: null,
         biography: null,
         place_of_birth: null,
-        profile_path: Constants.apiProfileUrl + person.profile_path
-      }))
-    );
+        profile_path: person.profile_path == null ? "./assets/images/person_placeholder.jpeg" : Constants.apiProfileUrl + person.profile_path
+      })),
+      error: (error) => console.error(error)
+    });
     this.page++;
   }
 

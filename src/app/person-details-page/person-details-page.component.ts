@@ -32,8 +32,9 @@ export class PersonDetailsPageComponent implements OnInit {
         birthday: person.birthday,
         biography: person.biography,
         place_of_birth: person.place_of_birth,
-        profile_path: Constants.apiProfileUrl + person.profile_path
+        profile_path: person.profile_path == null ? "./assets/images/person_placeholder.jpeg" : Constants.apiProfileUrl + person.profile_path
       },
+      error: (error) => console.error(error),
       complete: () => this.checkIfSaved()
     });
     this.loadMovies();
@@ -41,8 +42,8 @@ export class PersonDetailsPageComponent implements OnInit {
   }
 
   loadMovies(){
-    this.personService.getMovieCredits(this.personId).subscribe(
-      (data : PersonCredits) => data.cast.forEach(cast => this.movies.push({
+    this.personService.getMovieCredits(this.personId).subscribe({
+      next: (data : PersonCredits) => data.cast.forEach(cast => this.movies.push({
         id : cast.id,
         title : cast.title,
         release_year : cast.release_date.substring(0, 4),
@@ -51,14 +52,15 @@ export class PersonDetailsPageComponent implements OnInit {
         genres : null,
         overview : cast.overview,
         vote_average : cast.vote_average,
-        poster_path : Constants.apiPosterUrl + cast.poster_path
-      }))
-    );
+        poster_path : cast.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + cast.poster_path
+      })),
+      error: (error) => console.error(error)
+    });
   }
 
   loadShows(){
-    this.personService.getShowCredits(this.personId).subscribe(
-      (data : PersonCredits) => data.cast.forEach(cast => this.shows.push({
+    this.personService.getShowCredits(this.personId).subscribe({
+      next: (data : PersonCredits) => data.cast.forEach(cast => this.shows.push({
         id: cast.id,
         name: cast.name,
         first_air_date: cast.first_air_date,
@@ -67,10 +69,11 @@ export class PersonDetailsPageComponent implements OnInit {
         overview: cast.overview,
         num_of_episodes: null,
         num_of_seasons: null,
-        poster_path: Constants.apiPosterUrl + cast.poster_path,
+        poster_path: cast.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + cast.poster_path,
         seasons: null
-      }))
-    );
+      })),
+      error: (error) => console.error(error)
+    });
   }
 
   checkIfSaved(){

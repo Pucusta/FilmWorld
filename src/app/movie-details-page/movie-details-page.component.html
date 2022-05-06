@@ -1,7 +1,7 @@
 <div class="movieview-container">
     <div class="movieview" fxLayout fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="30px">
         <div class="movieview-image">
-            <img [src]="movie.poster_path" [alt]="movie.title">
+            <img [src]="movie.poster_path" onerror="this.src='./app/assets/images/poster_placeholder.jpeg';" [alt]="movie.title">
         </div>
         <div class="movieview-details">
             <div class="movieview-name">

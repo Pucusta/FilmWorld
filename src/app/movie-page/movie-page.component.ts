@@ -20,8 +20,8 @@ export class MoviePageComponent implements OnInit {
   }
 
   loadMovies() {
-    this.movieService.getPopularMovies(this.page).subscribe(
-      data => data.results.forEach(popMovie => this.popularMovies.push({
+    this.movieService.getPopularMovies(this.page).subscribe({
+      next: data => data.results.forEach(popMovie => this.popularMovies.push({
         id : popMovie.id,
         title : popMovie.title,
         release_year : popMovie.release_date.substring(0, 4),
@@ -30,9 +30,10 @@ export class MoviePageComponent implements OnInit {
         genres : null,
         overview : popMovie.overview,
         vote_average : popMovie.vote_average,
-        poster_path : Constants.apiPosterUrl + popMovie.poster_path
-      }))
-    );
+        poster_path : popMovie.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + popMovie.poster_path
+      })),
+      error: (error) => console.error(error)
+    });
     this.page++;
   }
 }

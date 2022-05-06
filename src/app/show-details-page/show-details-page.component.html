@@ -1,7 +1,7 @@
 <div class="showview-container">
     <div class="showview" fxLayout fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="30px">
         <div class="showview-image">
-            <img [src]="show.poster_path" [alt]="show.name">
+            <img [src]="show.poster_path" onerror="this.src='./app/assets/images/poster_placeholder.jpeg';" [alt]="show.name">
         </div>
         <div class="showview-details">
             <div class="showview-name">

@@ -31,8 +31,8 @@ export class SearchPageComponent implements OnInit {
   }
 
   loadMovies() {
-    this.searchService.getMovieSearch(this.searchTerm, this.moviePage).subscribe(
-      (data : MovieResult) => data.results.forEach(movie => this.movies.push({
+    this.searchService.getMovieSearch(this.searchTerm, this.moviePage).subscribe({
+      next: (data : MovieResult) => data.results.forEach(movie => this.movies.push({
         id : movie.id,
         title : movie.title,
         release_year : movie.release_date.substring(0, 4),
@@ -41,15 +41,16 @@ export class SearchPageComponent implements OnInit {
         genres : null,
         overview : movie.overview,
         vote_average : movie.vote_average,
-        poster_path : Constants.apiPosterUrl + movie.poster_path
-      })) 
-    );
+        poster_path : movie.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + movie.poster_path
+      })),
+      error: (error) => console.error(error)
+    });
     this.moviePage++;
   }
   
   loadShows() {
-    this.searchService.getShowSearch(this.searchTerm, this.showPage).subscribe(
-      (data : ShowResult) => data.results.forEach(show => this.shows.push({
+    this.searchService.getShowSearch(this.searchTerm, this.showPage).subscribe({
+      next: (data : ShowResult) => data.results.forEach(show => this.shows.push({
         id: show.id,
         name: show.name,
         first_air_date: show.first_air_date,
@@ -58,25 +59,27 @@ export class SearchPageComponent implements OnInit {
         overview: show.overview,
         num_of_episodes: null,
         num_of_seasons: null,
-        poster_path: Constants.apiPosterUrl + show.poster_path,
+        poster_path: show.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + show.poster_path,
         seasons: null
-      }))
-    );
+      })),
+      error: (error) => console.error(error)
+    });
     this.showPage++;
   }
   
   loadPeople() {
-    this.searchService.getPersonSearch(this.searchTerm, this.personPage).subscribe(
-      (data : PersonResult) => data.results.forEach(person => this.people.push({
+    this.searchService.getPersonSearch(this.searchTerm, this.personPage).subscribe({
+      next: (data : PersonResult) => data.results.forEach(person => this.people.push({
         id: person.id,
         name: person.name,
         gender: person.gender == 1 ? 'woman' : 'man',
         birthday: null,
         biography: null,
         place_of_birth: null,
-        profile_path: Constants.apiProfileUrl + person.profile_path
-      }))
-    );
+        profile_path: person.profile_path == null ? "./assets/images/person_placeholder.jpeg" : Constants.apiProfileUrl + person.profile_path
+      })),
+      error: (error) => console.error(error)
+    });
     this.personPage++;
   }
 }
