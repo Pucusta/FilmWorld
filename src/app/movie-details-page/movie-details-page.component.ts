@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs';
 import { MovieDetails, Movie, MovieCredits } from '../models/movie.type';
 import { Person } from '../models/person.type';
 import { Constants } from '../services/constants';
@@ -19,6 +20,7 @@ export class MovieDetailsPageComponent implements OnInit {
   cast: Person[] = [];
   page: number = 1;
   saved: boolean;
+  placeholder: string = Constants.posterPlaceholderPath;
 
   constructor(private movieService: MovieService, private saveService : SaveService, private activatedRoute: ActivatedRoute) { }
 
@@ -34,7 +36,7 @@ export class MovieDetailsPageComponent implements OnInit {
           genres : data.genres,
           overview : data.overview,
           vote_average : data.vote_average,
-          poster_path : data.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + data.poster_path
+          poster_path : data.poster_path == null ? Constants.posterPlaceholderPath : Constants.apiPosterUrl + data.poster_path
         },
         error: (error) => console.error(error),
         complete: () => this.checkIfSaved()

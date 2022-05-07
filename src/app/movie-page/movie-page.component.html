@@ -5,7 +5,9 @@
         </div>
     </div>
     <div class="movielist">
-        <movie-details *ngFor="let movie of popularMovies" [movie-details]="movie"></movie-details>
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <movie-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of popularMovies" [movie-details]="movie"></movie-details>
+        </div>
     </div>
     <div class="button-container">
         <button (click)="loadMovies()">More...</button>

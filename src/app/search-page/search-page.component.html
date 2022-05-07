@@ -6,7 +6,9 @@
         <mat-tab-group mat-stretch-tabs>
             <mat-tab label="Movies"> 
                 <div class="searchlist">
-                    <movie-details *ngFor="let movie of movies" [movie-details]="movie"></movie-details>
+                    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+                        <movie-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of movies" [movie-details]="movie"></movie-details>
+                    </div>
                 </div>
                 <div class="button-container">
                     <button (click)="loadMovies()">More...</button>
@@ -14,7 +16,9 @@
             </mat-tab>
             <mat-tab label="TV Shows">
                 <div class="searchlist">
-                    <show-details *ngFor="let show of shows" [show-details]="show"></show-details>
+                    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+                        <show-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let show of shows" [show-details]="show"></show-details>
+                    </div>
                 </div>
                 <div class="button-container">
                     <button (click)="loadShows()">More...</button>
@@ -22,7 +26,9 @@
             </mat-tab>
             <mat-tab label="Actors">
                 <div class="searchlist">
-                    <person-details *ngFor="let person of people" [person-details]="person"></person-details>
+                    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+                        <person-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let person of people" [person-details]="person"></person-details>
+                    </div>
                 </div>
                 <div class="button-container">
                     <button (click)="loadPeople()">More...</button>

@@ -15,7 +15,7 @@ export class ShowDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  navigateToMovie(){
+  navigateToShow(){
     let url = '/show/' + this.show.id;
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         this.router.navigate([url]);

@@ -41,13 +41,6 @@ mat-tab-group {
 mat-tab-group p {
     padding-top: 20px;
 }
-.movielist {
-    display: flex;
-    color: grey;
-    padding: 15px;
-    flex-wrap: wrap;
-    padding-top: 0;
-}
 .movielist-breadcrumb {
     font-family: system-ui;
     display: flex;

@@ -1,7 +1,7 @@
 <div class="movieview-container">
     <div class="movieview" fxLayout fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="30px">
         <div class="movieview-image">
-            <img [src]="movie.poster_path" onerror="this.src='./app/assets/images/poster_placeholder.jpeg';" [alt]="movie.title">
+            <img *ngIf="movie.poster_path" src="{{movie.poster_path}}" alt="{{placeholder}}">
         </div>
         <div class="movieview-details">
             <div class="movieview-name">
@@ -37,7 +37,9 @@
         </div>
     </div>
     <div class="personlist">
-        <person-details *ngFor="let person of cast" [person-details]="person"></person-details>
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <person-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let person of cast" [person-details]="person"></person-details>
+        </div>
     </div>
 </div>
 <div class="movielist-cnt">
@@ -47,7 +49,9 @@
         </div>
     </div>
     <div class="movielist">
-        <movie-details *ngFor="let movie of similarMovies" [movie-details]="movie"></movie-details>
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <movie-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of similarMovies" [movie-details]="movie"></movie-details>
+        </div>
     </div>
     <div class="button-container">
         <button (click)="loadMovies()">More...</button>

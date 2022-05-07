@@ -51,7 +51,9 @@
         </div>
     </div>
     <div class="showlist">
-        <show-details *ngFor="let show of similarShows" [show-details]="show"></show-details>
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <show-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let show of similarShows" [show-details]="show"></show-details>
+        </div>
     </div>
     <div class="button-container">
         <button (click)="loadShows()">More...</button>
