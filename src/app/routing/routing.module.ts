@@ -10,6 +10,7 @@ import { PersonDetailsPageComponent } from '../components/person-details-page/pe
 import { ShowDetailsPageComponent } from '../components/show-details-page/show-details-page.component';
 import { SearchPageComponent } from '../components/search-page/search-page.component';
  
+/* Defining the routes for the application. */
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -22,6 +23,8 @@ const routes: Routes = [
   { path: 'search', component: SearchPageComponent}
 ];
  
+/* The RoutingModule class is a module that imports the CommonModule and the RouterModule, and exports
+the RouterModule */
 @NgModule({
   imports: [
     CommonModule,
