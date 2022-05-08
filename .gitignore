@@ -5,56 +5,56 @@
 \paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 # Outputs\
-bazel-*\
-test-project-host-*\
-dist/\
-dist-schema/\
+\f0\fs24 \cf0 # Outputs
+bazel-*
+test-project-host-*
+dist/
+dist-schema/
 \
 # IDEs\
-jsconfig.json\
+jsconfig.json
 \
 # Intellij IDEA/WebStorm\
 # https://intellij-support.jetbrains.com/hc/en-us/articles/206544839\
-.idea/inspectionProfiles/\
-.idea/**/compiler.xml\
-.idea/**/encodings.xml\
-.idea/**/workspace.xml\
-.idea/**/tasks.xml\
-.idea/**/usage.statistics.xml\
-.idea/**/dictionaries\
-.idea/**/shelf\
+.idea/inspectionProfiles/
+.idea/**/compiler.xml
+.idea/**/encodings.xml
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
 \
 # Also ignore code styles because .editorconfig is used instead.\
-.idea/codeStyles/\
+.idea/codeStyles/
 \
 # VSCode\
 # https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore\
 .vscode
 .vscode/
-!.vscode/settings.json\
-!.vscode/tasks.json\
-!.vscode/launch.json\
-!.vscode/extensions.json\
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 **/*.code-workspace\
 \
 # Typings file.\
 typings/\
 \
 # Misc\
-coverage/\
+coverage/
 node_modules
 node_modules/
-tmp/\
-npm-debug.log*\
-yarn-error.log*\
-.ng_pkg_build/\
-.ng-dev.log\
-.ng-dev.err*.log\
-.ng-dev.user*\
-.husky/_\
-.bazelrc.user\
-.eslintcache\
+tmp/
+npm-debug.log*
+yarn-error.log*
+.ng_pkg_build/
+.ng-dev.log
+.ng-dev.err*.log
+.ng-dev.user*
+.husky/_
+.bazelrc.user
+.eslintcache
 \
 # Mac OSX Finder files.\
 **/.DS_Store\
