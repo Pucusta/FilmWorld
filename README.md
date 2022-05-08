@@ -1,6 +1,7 @@
 # FilmWorld
 
-This project is a homework for Client Side Technologies.
+This project is a homework for Client Side Technologies, it provides general help with movie hunting using The Movie Database API.
+
 It was was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
 
 ## Development server
