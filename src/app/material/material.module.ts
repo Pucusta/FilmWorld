@@ -10,6 +10,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule} from '@angular/material/card';
 
 
+/* The MaterialModule class is a module that imports and exports all of the Angular Material components
+that we will use in this project */
 @NgModule({
   declarations: [],
   imports: [
