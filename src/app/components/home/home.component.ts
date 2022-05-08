@@ -5,6 +5,7 @@ import { Person } from '../../models/person.type';
 import { Show } from '../../models/show.type';
 import { SaveService } from '../../services/save.service';
 
+/* This class is a component that displays the saved movies, shows, and people */
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

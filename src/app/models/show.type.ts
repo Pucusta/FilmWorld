@@ -61,34 +61,3 @@ export interface Episode {
     guest_stars: object[];
     runtime: number;
 }
-
-/*
-export interface Show {
-    id: number;
-    name: string;
-    first_air_date: string;
-    genres: Genre[];
-    vote_average: number;
-    overview: string;
-    num_of_episodes: number;
-    num_of_seasons: number;
-    poster_path: string;
-    seasons: SeasonDetails[];
-}
-
-export interface ShowResult {
-    poster_path: string;
-    popularity: number;
-    id: number;
-    backdrop_path: string;
-    vote_average: number;
-    overview: string;
-    first_air_date: string;
-    origin_country: string[];
-    genre_ids: number[];
-    original_language: string;
-    vote_count: number;
-    name: string;
-    original_name: string;
-}
-*/

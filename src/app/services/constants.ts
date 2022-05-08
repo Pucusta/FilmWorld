@@ -1,3 +1,4 @@
+/* It's a class that contains static properties that are used throughout the app */
 export class Constants {
     public static apiUrl: string = "https://api.themoviedb.org/3";
     public static apiKey: string = "860da3ce8135f7f7dd4157480952a077";

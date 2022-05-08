@@ -8,6 +8,7 @@ import { ObservableFunctions } from '../../services/functions';
 import { SaveService } from '../../services/save.service';
 import { ShowService } from '../../services/show.service';
 
+/* It's a component that displays the details of a show */
 @Component({
   selector: 'app-show-details-page',
   templateUrl: './show-details-page.component.html',
@@ -30,6 +31,10 @@ export class ShowDetailsPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private observableFunctions: ObservableFunctions) { }
 
+  /**
+   * We subscribe to the activated route's params, which gives us the showId, and then we use that
+   * showId to get the show, the seasons, and the similar shows
+   */
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.showId = params.id;
@@ -43,11 +48,18 @@ export class ShowDetailsPageComponent implements OnInit {
     this.page++
   }
 
+  /**
+   * We're using the concatObservableResults function to concatenate the results of the getSimilarShows
+   * function to the similarShows array
+   */
   loadShows(){
     this.similarShows = this.observableFunctions.concatObservableResults(this.similarShows, this.showService.getSimilarShows(this.showId, this.page));
     this.page++;
   }
 
+  /**
+   * If the show is saved, change the text of the save button to 'Saved', otherwise change it to 'Save'
+   */
   checkIfSaved(){
     this.saved = this.saveService.isShowSaved(this.showId);
     let saveButton = document.getElementById('saveButton');
@@ -55,6 +67,11 @@ export class ShowDetailsPageComponent implements OnInit {
     else document.getElementById('saveButton').textContent = 'Save';
   }
 
+  /**
+   * If the show is saved, remove it from the saved shows list, otherwise add it to the saved shows
+   * list
+   * @param element - The element that was clicked.
+   */
   save(element) {
     if (this.saved) {
       this.saveService.removeShow(this.showId);
@@ -66,55 +83,3 @@ export class ShowDetailsPageComponent implements OnInit {
     this.saved = !this.saved;
   }
 }
-
-/*
-ngOnInit(): void {
-    let seasonsLength = 0;
-    this.activatedRoute.params.subscribe((params: Params) => this.showId = params.id);
-    this.showService.getShow(this.showId).subscribe({
-      next: (data : Show) => this.show = {
-        id: data.id,
-        name: data.name,
-        first_air_date: data.first_air_date,
-        genres: data.genres,
-        vote_average: data.vote_average,
-        overview: data.overview,
-        num_of_episodes: data.number_of_episodes,
-        num_of_seasons: data.number_of_seasons,
-        poster_path: data.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + data.poster_path,
-        seasons: data.seasons
-      },
-      error: (error) => console.error(error),
-      complete: () => {
-        this.checkIfSaved();
-        this.show.seasons.forEach(
-          season => this.showService.getSeason(this.showId, season.season_number).subscribe({
-            next: (data : Season) => seasonsLength = this.seasons.push(data),
-            complete: () => this.seasons[seasonsLength - 1].episodes.forEach(
-              episode => episode.still_path = episode.still_path == null ? "./assets/images/episode_placeholder.jpeg" : Constants.apiStillUrl + episode.still_path
-            )
-          })
-        );}
-    });
-    this.loadShows();
-  }
-
-  loadShows(){
-    this.showService.getSimilarShows(this.showId, this.page).subscribe({
-      next: data => data.results.forEach(show => this.similarShows.push({
-        id: show.id,
-        name: show.name,
-        first_air_date: show.first_air_date,
-        genres: null,
-        vote_average: show.vote_average,
-        overview: show.overview,
-        num_of_episodes: null,
-        num_of_seasons: null,
-        poster_path: show.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + show.poster_path,
-        seasons: null
-      })),
-      error: (error) => console.error(error)
-    });
-    this.page++;
-  }
-*/
