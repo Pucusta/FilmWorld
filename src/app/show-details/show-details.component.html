@@ -1,6 +1,6 @@
 <div class="show-card" routerLink="/show/{{ show.id }}" (click)="navigateToShow()">
     <mat-card class="mat-elevation-z4">
-        <img mat-card-image [src]="show.poster_path" [alt]="show.name">
+        <img mat-card-image [src]="show.poster_path == null ? placeholder : apiPosterUrl + show.poster_path" [alt]="show.name">
         <mat-card-header>
             <mat-card-title>{{ show.name }}</mat-card-title>
         </mat-card-header>

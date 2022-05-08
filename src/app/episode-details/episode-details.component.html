@@ -1,6 +1,6 @@
 <div clas="episode-card" fxLayout="row">
     <div class="episode-card-img">
-        <img [src]="episode.still_path" [alt]="episode.name">
+        <img [src]="episode.still_path == null ? placeholder : apiStillUrl + episode.still_path" [alt]="episode.name">
     </div>
     <div class="episode-card-details" fxLayout="column">
         <div class="episode-card-name">

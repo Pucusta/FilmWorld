@@ -1,6 +1,6 @@
 <div class="movie-card" routerLink="/movie/{{ movie.id }}" (click)="navigateToMovie()">
     <mat-card class="mat-elevation-z4">
-        <img mat-card-image [src]="movie.poster_path" [alt]="movie.title">
+        <img mat-card-image [src]="movie.poster_path == null ? placeholder : apiPosterUrl + movie.poster_path" [alt]="movie.title">
         <mat-card-header>
             <mat-card-title>{{ movie.title }}</mat-card-title>
           </mat-card-header>

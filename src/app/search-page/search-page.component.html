@@ -7,7 +7,7 @@
             <mat-tab label="Movies"> 
                 <div class="searchlist">
                     <div fxLayout="row wrap" fxLayoutGap="16px grid">
-                        <movie-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of movies" [movie-details]="movie"></movie-details>
+                        <movie-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of (movies | async)?.results" [movie-details]="movie"></movie-details>
                     </div>
                 </div>
                 <div class="button-container">
@@ -17,7 +17,7 @@
             <mat-tab label="TV Shows">
                 <div class="searchlist">
                     <div fxLayout="row wrap" fxLayoutGap="16px grid">
-                        <show-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let show of shows" [show-details]="show"></show-details>
+                        <show-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let show of (shows | async)?.results" [show-details]="show"></show-details>
                     </div>
                 </div>
                 <div class="button-container">
@@ -27,7 +27,7 @@
             <mat-tab label="Actors">
                 <div class="searchlist">
                     <div fxLayout="row wrap" fxLayoutGap="16px grid">
-                        <person-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let person of people" [person-details]="person"></person-details>
+                        <person-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let person of (people | async)?.results" [person-details]="person"></person-details>
                     </div>
                 </div>
                 <div class="button-container">

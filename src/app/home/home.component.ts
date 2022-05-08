@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Movie } from '../models/movie.type';
 import { Person } from '../models/person.type';
 import { Show } from '../models/show.type';
@@ -11,15 +12,15 @@ import { SaveService } from '../services/save.service';
 })
 export class HomeComponent implements OnInit {
 
-  savedMovies : Movie[];
-  savedShows : Show[];
-  savedPeople : Person[];
+  savedMovies : Observable<Movie[]>;
+  savedShows : Observable<Show[]>;
+  savedPeople : Observable<Person[]>;
 
   constructor(private saveService : SaveService) { }
 
   ngOnInit(): void {
-    this.savedMovies = this.saveService.getMovies();
-    this.savedShows = this.saveService.getShows();
-    this.savedPeople = this.saveService.getPeople();
+    this.savedMovies = this.saveService.getMoviesObservable();
+    this.savedShows = this.saveService.getShowsObservable();
+    this.savedPeople = this.saveService.getPeopleObservable();
   }
 }

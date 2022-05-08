@@ -10,21 +10,21 @@
         <mat-tab label="Movies"> 
           <div class="list">
             <div fxLayout="row wrap" fxLayoutGap="16px grid">
-              <movie-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of savedMovies" [movie-details]="movie"></movie-details>
+              <movie-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let movie of (savedMovies | async)" [movie-details]="movie"></movie-details>
             </div>
           </div>
         </mat-tab>
         <mat-tab label="TV Shows">
           <div class="list">
             <div fxLayout="row wrap" fxLayoutGap="16px grid">
-              <show-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let show of savedShows" [show-details]="show"></show-details>
+              <show-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let show of (savedShows | async)" [show-details]="show"></show-details>
             </div>
           </div>
         </mat-tab>
         <mat-tab label="Actors">
           <div class="list">
             <div fxLayout="row wrap" fxLayoutGap="16px grid">
-              <person-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let person of savedPeople" [person-details]="person"></person-details>
+              <person-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let person of (savedPeople | async)" [person-details]="person"></person-details>
             </div>
           </div>
         </mat-tab>

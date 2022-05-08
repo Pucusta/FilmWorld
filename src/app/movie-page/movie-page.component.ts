@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Movie } from '../models/movie.type';
+import { Result } from '../models/result.type';
 import { Constants } from '../services/constants';
+import { ObservableFunctions } from '../services/functions';
 import { MovieService } from '../services/movie.service';
 
 @Component({
@@ -10,30 +13,18 @@ import { MovieService } from '../services/movie.service';
 })
 export class MoviePageComponent implements OnInit {
 
-  popularMovies: Movie[] = [];
+  popularMovies: Observable<Result<Movie>>;
   page: number = 1;
 
-  constructor(private movieService: MovieService) { }
+  constructor(private movieService: MovieService, private observableFunctions: ObservableFunctions) { }
 
   ngOnInit(): void {
-    this.loadMovies();
+    this.popularMovies = this.movieService.getPopularMovies(this.page);
+    this.page++;
   }
 
   loadMovies() {
-    this.movieService.getPopularMovies(this.page).subscribe({
-      next: data => data.results.forEach(popMovie => this.popularMovies.push({
-        id : popMovie.id,
-        title : popMovie.title,
-        release_year : popMovie.release_date.substring(0, 4),
-        release_date : popMovie.release_date,
-        runtime : null,
-        genres : null,
-        overview : popMovie.overview,
-        vote_average : popMovie.vote_average,
-        poster_path : popMovie.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + popMovie.poster_path
-      })),
-      error: (error) => console.error(error)
-    });
+    this.popularMovies = this.observableFunctions.concatObservableResults(this.popularMovies, this.movieService.getPopularMovies(this.page));
     this.page++;
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Constants } from '../services/constants';
 
 @Component({
   selector: 'movie-details',
@@ -9,6 +10,9 @@ import { Router } from '@angular/router';
 export class MovieDetailsComponent implements OnInit {
 
   @Input('movie-details') movie: any;
+
+  placeholder: string = Constants.posterPlaceholderPath;
+  apiPosterUrl: string = Constants.apiPosterUrl;
 
   constructor(private router: Router) { }
 

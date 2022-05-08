@@ -28,6 +28,7 @@ import { EpisodeDetailsComponent } from './episode-details/episode-details.compo
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SearchService } from './services/search.service';
 import { SaveService } from './services/save.service';
+import { ObservableFunctions } from './services/functions';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { SaveService } from './services/save.service';
     PersonService,
     ShowService,
     SearchService,
-    SaveService
+    SaveService,
+    ObservableFunctions
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Person } from '../models/person.type';
-import { Constants } from '../services/constants';
+import { Result } from '../models/result.type';
+import { ObservableFunctions } from '../services/functions';
 import { PersonService } from '../services/person.service';
 
 @Component({
@@ -10,28 +12,18 @@ import { PersonService } from '../services/person.service';
 })
 export class PersonPageComponent implements OnInit {
 
-  popularPeople: Person[] = [];
+  popularPeople: Observable<Result<Person>>;
   page: number = 1;
 
-  constructor(private personService: PersonService) { }
+  constructor(private personService: PersonService, private observableFunctions: ObservableFunctions) { }
 
   ngOnInit(): void {
-    this.loadPeople();
+    this.popularPeople = this.personService.getPopularPeople(this.page);
+    this.page++;
   }
 
   loadPeople() {
-    this.personService.getPopularPeople(this.page).subscribe({
-      next: data => data.results.forEach(person => this.popularPeople.push({
-        id: person.id,
-        name: person.name,
-        gender: person.gender == 1 ? 'woman' : 'man',
-        birthday: null,
-        biography: null,
-        place_of_birth: null,
-        profile_path: person.profile_path == null ? "./assets/images/person_placeholder.jpeg" : Constants.apiProfileUrl + person.profile_path
-      })),
-      error: (error) => console.error(error)
-    });
+    this.popularPeople = this.observableFunctions.concatObservableResults(this.popularPeople, this.personService.getPopularPeople(this.page));
     this.page++;
   }
 
