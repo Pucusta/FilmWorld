@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Movie } from '../models/movie.type';
-import { Result } from '../models/result.type';
-import { Constants } from '../services/constants';
-import { ObservableFunctions } from '../services/functions';
-import { MovieService } from '../services/movie.service';
+import { Movie } from '../../models/movie.type';
+import { Result } from '../../models/result.type';
+import { Constants } from '../../services/constants';
+import { ObservableFunctions } from '../../services/functions';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-movie-page',

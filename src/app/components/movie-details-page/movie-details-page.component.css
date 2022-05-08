@@ -49,14 +49,6 @@
 button {
     font-size: 25px;
 }
-.personlist {
-    display: flex;
-    color: grey;
-    padding: 15px;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding-top: 0;
-}
 .personlist-breadcrumb {
     font-family: system-ui;
     display: flex;

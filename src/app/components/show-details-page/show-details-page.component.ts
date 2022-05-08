@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Result } from '../models/result.type';
-import { Season, Show } from '../models/show.type';
-import { Constants } from '../services/constants';
-import { ObservableFunctions } from '../services/functions';
-import { SaveService } from '../services/save.service';
-import { ShowService } from '../services/show.service';
+import { Result } from '../../models/result.type';
+import { Season, Show } from '../../models/show.type';
+import { Constants } from '../../services/constants';
+import { ObservableFunctions } from '../../services/functions';
+import { SaveService } from '../../services/save.service';
+import { ShowService } from '../../services/show.service';
 
 @Component({
   selector: 'app-show-details-page',

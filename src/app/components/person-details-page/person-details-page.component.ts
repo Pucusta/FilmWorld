@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Credits } from '../models/credits.type';
-import { Person, PersonCast } from '../models/person.type';
-import { Constants } from '../services/constants';
-import { ObservableFunctions } from '../services/functions';
-import { PersonService } from '../services/person.service';
-import { SaveService } from '../services/save.service';
+import { Credits } from '../../models/credits.type';
+import { Person, PersonCast } from '../../models/person.type';
+import { Constants } from '../../services/constants';
+import { ObservableFunctions } from '../../services/functions';
+import { PersonService } from '../../services/person.service';
+import { SaveService } from '../../services/save.service';
 
 @Component({
   selector: 'app-person-details-page',

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from '../home/home.component';
-import { MoviePageComponent } from '../movie-page/movie-page.component';
-import { ShowPageComponent } from '../show-page/show-page.component';
-import { PersonPageComponent } from '../person-page/person-page.component';
-import { MovieDetailsPageComponent } from '../movie-details-page/movie-details-page.component';
-import { PersonDetailsPageComponent } from '../person-details-page/person-details-page.component';
-import { ShowDetailsPageComponent } from '../show-details-page/show-details-page.component';
-import { SearchPageComponent } from '../search-page/search-page.component';
+import { HomeComponent } from '../components/home/home.component';
+import { MoviePageComponent } from '../components/movie-page/movie-page.component';
+import { ShowPageComponent } from '../components/show-page/show-page.component';
+import { PersonPageComponent } from '../components/person-page/person-page.component';
+import { MovieDetailsPageComponent } from '../components/movie-details-page/movie-details-page.component';
+import { PersonDetailsPageComponent } from '../components/person-details-page/person-details-page.component';
+import { ShowDetailsPageComponent } from '../components/show-details-page/show-details-page.component';
+import { SearchPageComponent } from '../components/search-page/search-page.component';
  
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
