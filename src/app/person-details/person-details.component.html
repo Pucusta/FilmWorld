@@ -1,9 +1,8 @@
 <div class="person-card" routerLink="/person/{{ person.id }}">
-    <div class="person-card-img" style="background-image: url({{ person.profile_path }});">
-    </div>
-    <div class="person-card-footer">
-        <div class="person-card-name">
-            <h3>{{ person.name }}</h3>
-        </div>
-    </div>
+    <mat-card class="mat-elevation-z4">
+        <img mat-card-image [src]="person.profile_path == null ? placeholder : apiProfilUrl + person.profile_path" [alt]="person.name">
+        <mat-card-header>
+            <mat-card-title>{{ person.name }}</mat-card-title>
+        </mat-card-header>
+    </mat-card>
 </div>

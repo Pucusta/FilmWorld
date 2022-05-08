@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Movie } from '../models/movie.type';
-import { Person, PersonCredits, PersonDetails } from '../models/person.type';
-import { Show } from '../models/show.type';
+import { Observable } from 'rxjs';
+import { Credits } from '../models/credits.type';
+import { Person, PersonCast } from '../models/person.type';
 import { Constants } from '../services/constants';
+import { ObservableFunctions } from '../services/functions';
 import { PersonService } from '../services/person.service';
 import { SaveService } from '../services/save.service';
 
@@ -14,70 +15,32 @@ import { SaveService } from '../services/save.service';
 })
 export class PersonDetailsPageComponent implements OnInit {
 
-  person: Person;
+  person: Observable<Person>;
   personId: number;
-  movies: Movie[] = [];
-  shows: Show[] = [];
+  movies: Observable<Credits<PersonCast>>;
+  shows: Observable<Credits<PersonCast>>;
   saved: boolean;
+  placeholder: string = Constants.personPlacholderPath;
+  apiProfileUrl: string = Constants.apiProfileUrl;
 
-  constructor(private personService: PersonService, private saveService : SaveService, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private personService: PersonService,
+    private saveService : SaveService,
+    private activatedRoute: ActivatedRoute,
+    private observableFunctions: ObservableFunctions) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params: Params) => this.personId = params.id);
-    this.personService.getPerson(this.personId).subscribe({
-      next: (person : PersonDetails) => this.person = {
-        id: person.id,
-        name: person.name,
-        gender: person.gender == 1 ? 'woman' : 'man',
-        birthday: person.birthday,
-        biography: person.biography,
-        place_of_birth: person.place_of_birth,
-        profile_path: person.profile_path == null ? "./assets/images/person_placeholder.jpeg" : Constants.apiProfileUrl + person.profile_path
-      },
-      error: (error) => console.error(error),
-      complete: () => this.checkIfSaved()
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.personId = params.id;
+      this.checkIfSaved();
     });
-    this.loadMovies();
-    this.loadShows();
-  }
-
-  loadMovies(){
-    this.personService.getMovieCredits(this.personId).subscribe({
-      next: (data : PersonCredits) => data.cast.forEach(cast => this.movies.push({
-        id : cast.id,
-        title : cast.title,
-        release_year : cast.release_date.substring(0, 4),
-        release_date : cast.release_date,
-        runtime : null,
-        genres : null,
-        overview : cast.overview,
-        vote_average : cast.vote_average,
-        poster_path : cast.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + cast.poster_path
-      })),
-      error: (error) => console.error(error)
-    });
-  }
-
-  loadShows(){
-    this.personService.getShowCredits(this.personId).subscribe({
-      next: (data : PersonCredits) => data.cast.forEach(cast => this.shows.push({
-        id: cast.id,
-        name: cast.name,
-        first_air_date: cast.first_air_date,
-        genres: null,
-        vote_average: cast.vote_average,
-        overview: cast.overview,
-        num_of_episodes: null,
-        num_of_seasons: null,
-        poster_path: cast.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + cast.poster_path,
-        seasons: null
-      })),
-      error: (error) => console.error(error)
-    });
+    this.person = this.personService.getPerson(this.personId);
+    this.movies = this.personService.getMovieCredits(this.personId);
+    this.shows = this.personService.getShowCredits(this.personId);
   }
 
   checkIfSaved(){
-    this.saved = this.saveService.isPersonSaved(this.person);
+    this.saved = this.saveService.isPersonSaved(this.personId);
     let saveButton = document.getElementById('saveButton');
     if (this.saved) saveButton.textContent = 'Saved';
     else document.getElementById('saveButton').textContent = 'Save';
@@ -85,7 +48,7 @@ export class PersonDetailsPageComponent implements OnInit {
 
   save(element) {
     if (this.saved) {
-      this.saveService.removePerson(this.person);
+      this.saveService.removePerson(this.personId);
       element.textContent = 'Save';
     } else {
       this.saveService.savePerson(this.person);

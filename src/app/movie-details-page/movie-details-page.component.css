@@ -32,13 +32,6 @@
     border-bottom: 1px solid;
     padding-bottom: 4px;
 }
-.movielist {
-    display: flex;
-    color: grey;
-    padding: 15px;
-    flex-wrap: wrap;
-    padding-top: 0;
-}
 .movielist-breadcrumb {
     font-family: system-ui;
     display: flex;
@@ -48,7 +41,7 @@
     padding-top: 17px;
 }
 .movielist-breadcrumb h2 {
-    margin: 0;
+    margin-bottom: 30px
 }
 .button-container {
     text-align: center;  
@@ -73,5 +66,5 @@ button {
     padding-top: 17px;
 }
 .personlist-breadcrumb h2 {
-    margin: 0;
+    margin-bottom: 30px;
 }

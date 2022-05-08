@@ -5,7 +5,9 @@
         </div>
     </div>
     <div class="personlist">
-        <person-details *ngFor="let person of popularPeople" [person-details]="person"></person-details>
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <person-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let person of (popularPeople | async)?.results" [person-details]="person"></person-details>
+        </div>
     </div>
     <div class="button-container">
         <button (click)="loadPeople()">More...</button>

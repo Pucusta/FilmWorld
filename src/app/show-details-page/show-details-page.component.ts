@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Episode, SeasonDetails, Show, ShowDetails } from '../models/show.type';
+import { Observable } from 'rxjs';
+import { Result } from '../models/result.type';
+import { Season, Show } from '../models/show.type';
 import { Constants } from '../services/constants';
+import { ObservableFunctions } from '../services/functions';
 import { SaveService } from '../services/save.service';
 import { ShowService } from '../services/show.service';
 
@@ -12,20 +15,64 @@ import { ShowService } from '../services/show.service';
 })
 export class ShowDetailsPageComponent implements OnInit {
 
-  show: Show;
+  show: Observable<Show>;
   showId: number;
-  similarShows: Show[] = [];
-  seasons: SeasonDetails[] = [];
+  seasons: Observable<Season>[] = [];
+  similarShows: Observable<Result<Show>>;
   page: number = 1;
   saved: boolean;
+  placeholder: string = Constants.posterPlaceholderPath;
+  apiPosterUrl: string = Constants.apiPosterUrl;
 
-  constructor(private showService: ShowService, private saveService : SaveService, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private showService: ShowService,
+    private saveService : SaveService,
+    private activatedRoute: ActivatedRoute,
+    private observableFunctions: ObservableFunctions) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.showId = params.id;
+      this.checkIfSaved();
+    });
+    this.show = this.showService.getShow(this.showId);
+    this.show.subscribe(show => show.seasons.forEach(
+      season => this.seasons.push(this.showService.getSeason(this.showId, season.season_number))
+    ));
+    this.similarShows = this.showService.getSimilarShows(this.showId, this.page);
+    this.page++
+  }
+
+  loadShows(){
+    this.similarShows = this.observableFunctions.concatObservableResults(this.similarShows, this.showService.getSimilarShows(this.showId, this.page));
+    this.page++;
+  }
+
+  checkIfSaved(){
+    this.saved = this.saveService.isShowSaved(this.showId);
+    let saveButton = document.getElementById('saveButton');
+    if (this.saved) saveButton.textContent = 'Saved';
+    else document.getElementById('saveButton').textContent = 'Save';
+  }
+
+  save(element) {
+    if (this.saved) {
+      this.saveService.removeShow(this.showId);
+      element.textContent = 'Save';
+    } else {
+      this.saveService.saveShow(this.show);
+      element.textContent = 'Saved';
+    }
+    this.saved = !this.saved;
+  }
+}
+
+/*
+ngOnInit(): void {
     let seasonsLength = 0;
     this.activatedRoute.params.subscribe((params: Params) => this.showId = params.id);
     this.showService.getShow(this.showId).subscribe({
-      next: (data : ShowDetails) => this.show = {
+      next: (data : Show) => this.show = {
         id: data.id,
         name: data.name,
         first_air_date: data.first_air_date,
@@ -42,7 +89,7 @@ export class ShowDetailsPageComponent implements OnInit {
         this.checkIfSaved();
         this.show.seasons.forEach(
           season => this.showService.getSeason(this.showId, season.season_number).subscribe({
-            next: (data : SeasonDetails) => seasonsLength = this.seasons.push(data),
+            next: (data : Season) => seasonsLength = this.seasons.push(data),
             complete: () => this.seasons[seasonsLength - 1].episodes.forEach(
               episode => episode.still_path = episode.still_path == null ? "./assets/images/episode_placeholder.jpeg" : Constants.apiStillUrl + episode.still_path
             )
@@ -70,22 +117,4 @@ export class ShowDetailsPageComponent implements OnInit {
     });
     this.page++;
   }
-
-  checkIfSaved(){
-    this.saved = this.saveService.isShowSaved(this.show);
-    let saveButton = document.getElementById('saveButton');
-    if (this.saved) saveButton.textContent = 'Saved';
-    else document.getElementById('saveButton').textContent = 'Save';
-  }
-
-  save(element) {
-    if (this.saved) {
-      this.saveService.removeShow(this.show);
-      element.textContent = 'Save';
-    } else {
-      this.saveService.saveShow(this.show);
-      element.textContent = 'Saved';
-    }
-    this.saved = !this.saved;
-  }
-}
+*/

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Result } from '../models/result.type';
 import { Show } from '../models/show.type';
-import { Constants } from '../services/constants';
+import { ObservableFunctions } from '../services/functions';
 import { ShowService } from '../services/show.service';
 
 @Component({
@@ -10,31 +12,18 @@ import { ShowService } from '../services/show.service';
 })
 export class ShowPageComponent implements OnInit {
 
-  popularShows: Show[] = [];
+  popularShows: Observable<Result<Show>>;
   page: number = 1;
 
-  constructor(private showService: ShowService) { }
+  constructor(private showService: ShowService, private observableFunctions: ObservableFunctions) { }
 
   ngOnInit(): void {
-    this.loadShows();
+    this.popularShows = this.showService.getPopularShows(this.page);
+    this.page++;
   }
 
   loadShows(){
-    this.showService.getPopularShows(this.page).subscribe({
-      next: data => data.results.forEach(show => this.popularShows.push({
-        id: show.id,
-        name: show.name,
-        first_air_date: show.first_air_date,
-        genres: null,
-        vote_average: show.vote_average,
-        overview: show.overview,
-        num_of_episodes: null,
-        num_of_seasons: null,
-        poster_path: show.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + show.poster_path,
-        seasons: null
-      })),
-      error: (error) => console.error(error)
-    });
+    this.popularShows = this.observableFunctions.concatObservableResults(this.popularShows, this.showService.getPopularShows(this.page));
     this.page++;
   }
 

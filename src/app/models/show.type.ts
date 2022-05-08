@@ -1,47 +1,12 @@
 import { Genre } from "./genre.type";
 
 export interface Show {
-    id: number;
-    name: string;
-    first_air_date: string;
-    genres: Genre[];
-    vote_average: number;
-    overview: string;
-    num_of_episodes: number;
-    num_of_seasons: number;
-    poster_path: string;
-    seasons: SeasonDetails[];
-}
-
-export interface ShowResult {
-    page: number;
-    results: ShowPopular[];
-    total_results: number;
-    total_pages: number
-}
-
-export interface ShowPopular {
-    poster_path: string;
-    popularity: number;
-    id: number;
-    backdrop_path: string;
-    vote_average: number;
-    overview: string;
-    first_air_date: string;
-    origin_country: string[];
-    genre_ids: number[];
-    original_language: string;
-    vote_count: number;
-    name: string;
-    original_name: string;
-}
-
-export interface ShowDetails {
     backdrop_path: string;
     created_by: object[];
     episode_run_time: number[]
     first_air_date: string;
     genres: Genre[];
+    genre_ids: number[];
     homepage: string;
     id: number;
     in_production: boolean;
@@ -61,7 +26,7 @@ export interface ShowDetails {
     poster_path: string;
     production_companies: object[];
     production_countries: object[];
-    seasons: SeasonDetails[];
+    seasons: Season[];
     spoken_languages: object[];
     status: string;
     tagline: string;
@@ -70,7 +35,7 @@ export interface ShowDetails {
     vote_count: number;
 }
 
-export interface SeasonDetails {
+export interface Season {
     id: number;
     name: string;
     air_date: string;
@@ -96,3 +61,34 @@ export interface Episode {
     guest_stars: object[];
     runtime: number;
 }
+
+/*
+export interface Show {
+    id: number;
+    name: string;
+    first_air_date: string;
+    genres: Genre[];
+    vote_average: number;
+    overview: string;
+    num_of_episodes: number;
+    num_of_seasons: number;
+    poster_path: string;
+    seasons: SeasonDetails[];
+}
+
+export interface ShowResult {
+    poster_path: string;
+    popularity: number;
+    id: number;
+    backdrop_path: string;
+    vote_average: number;
+    overview: string;
+    first_air_date: string;
+    origin_country: string[];
+    genre_ids: number[];
+    original_language: string;
+    vote_count: number;
+    name: string;
+    original_name: string;
+}
+*/

@@ -1,31 +1,31 @@
 <div class="showview-container">
     <div class="showview" fxLayout fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="30px">
         <div class="showview-image">
-            <img [src]="show.poster_path" onerror="this.src='./app/assets/images/poster_placeholder.jpeg';" [alt]="show.name">
+            <img src="{{(show | async)?.poster_path == null ? placeholder : apiPosterUrl + (show | async)?.poster_path}}" alt="{{(show | async)?.name}}">
         </div>
         <div class="showview-details">
             <div class="showview-name">
-                <h1>{{ show.name }}</h1>
+                <h1>{{ (show | async)?.name }}</h1>
             </div>
             <div style="padding: 5px 0;">
                 <span>Genres: </span>
-                <span *ngFor="let genre of show.genres"> {{ genre.name }}</span>
+                <span *ngFor="let genre of (show | async)?.genres"> {{ genre.name }}</span>
             </div>
             <div style="padding: 5px 0;">
-                <span>First air date: {{ show.first_air_date }}</span>
+                <span>First air date: {{ (show | async)?.first_air_date }}</span>
             </div>
             <div style="padding: 5px 0;">
-                <span>Number of seasons: {{ show.num_of_seasons }}</span>
+                <span>Number of seasons: {{ (show | async)?.num_of_seasons }}</span>
             </div>
             <div style="padding: 5px 0;">
-                <span>Number of episodes: {{ show.num_of_episodes }}</span>
+                <span>Number of episodes: {{ (show | async)?.num_of_episodes }}</span>
             </div>
             <div style="padding: 5px 0;">
-                <span>Score: {{ show.vote_average }}</span>
+                <span>Score: {{ (show | async)?.vote_average }}</span>
             </div>
             <div class="showview-overview-cnt">
                 <h2>Overview</h2>
-                <div class="show-overview">{{ show.overview }}</div>
+                <div class="show-overview">{{ (show | async)?.overview }}</div>
             </div>
         </div>
         <div>
@@ -37,11 +37,11 @@
     <h2>Seasons</h2>
 </div>
 <mat-tab-group mat-stretch-tabs>
-    <mat-tab *ngFor="let season of seasons" [label]="season.season_number">
+    <mat-tab *ngFor="let season of seasons" [label]="(season | async)?.season_number">
         <div class="season-name">
-            <h2>{{ season.name }}</h2>
+            <h2>{{ (season | async)?.name }}</h2>
         </div>
-        <episode-details *ngFor="let episode of season.episodes" [episode-details]="episode"></episode-details>
+        <episode-details *ngFor="let episode of (season | async)?.episodes" [episode-details]="episode"></episode-details>
     </mat-tab>
 </mat-tab-group>
 <div class="showlist-cnt">
@@ -51,7 +51,9 @@
         </div>
     </div>
     <div class="showlist">
-        <show-details *ngFor="let show of similarShows" [show-details]="show"></show-details>
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <show-details fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let show of (similarShows | async)?.results" [show-details]="show"></show-details>
+        </div>
     </div>
     <div class="button-container">
         <button (click)="loadShows()">More...</button>

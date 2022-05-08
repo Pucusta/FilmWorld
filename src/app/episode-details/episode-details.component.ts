@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Constants } from '../services/constants';
 
 @Component({
   selector: 'episode-details',
@@ -8,6 +9,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class EpisodeDetailsComponent implements OnInit {
 
   @Input('episode-details') episode: any;
+
+  placeholder: string = Constants.episodePlaceholderPath;
+  apiStillUrl: string = Constants.apiStillUrl;
 
   constructor() { }
 

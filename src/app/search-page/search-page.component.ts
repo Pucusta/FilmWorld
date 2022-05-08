@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Movie, MovieResult } from '../models/movie.type';
-import { Person, PersonResult } from '../models/person.type';
-import { Show, ShowResult } from '../models/show.type';
+import { Observable } from 'rxjs';
+import { Movie } from '../models/movie.type';
+import { Person } from '../models/person.type';
+import { Result } from '../models/result.type';
+import { Show } from '../models/show.type';
 import { Constants } from '../services/constants';
+import { ObservableFunctions } from '../services/functions';
 import { SearchService } from '../services/search.service';
 
 @Component({
@@ -14,72 +17,40 @@ import { SearchService } from '../services/search.service';
 export class SearchPageComponent implements OnInit {
 
   searchTerm: string;
-  movies: Movie[] = [];
-  shows: Show[] = [];
-  people: Person[] = [];
+  movies: Observable<Result<Movie>>;
+  shows: Observable<Result<Show>>;
+  people: Observable<Result<Person>>;
   moviePage: number = 1;
   showPage: number = 1;
   personPage: number = 1;
 
-  constructor(private searchService: SearchService, private route: ActivatedRoute) { }
+  constructor(
+    private searchService: SearchService,
+    private route: ActivatedRoute,
+    private observableFunctions: ObservableFunctions) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => this.searchTerm = params.search_term);
-    this.loadMovies();
-    this.loadShows();
-    this.loadPeople();
+    this.movies = this.searchService.getMovieSearch(this.searchTerm, this.moviePage);
+    this.moviePage++;
+    this.shows = this.searchService.getShowSearch(this.searchTerm, this.showPage);
+    this.showPage++;
+    this.people = this.searchService.getPersonSearch(this.searchTerm, this.personPage);
+    this.personPage++;
   }
 
   loadMovies() {
-    this.searchService.getMovieSearch(this.searchTerm, this.moviePage).subscribe({
-      next: (data : MovieResult) => data.results.forEach(movie => this.movies.push({
-        id : movie.id,
-        title : movie.title,
-        release_year : movie.release_date.substring(0, 4),
-        release_date : movie.release_date,
-        runtime : null,
-        genres : null,
-        overview : movie.overview,
-        vote_average : movie.vote_average,
-        poster_path : movie.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + movie.poster_path
-      })),
-      error: (error) => console.error(error)
-    });
+    this.movies = this.observableFunctions.concatObservableResults(this.movies, this.searchService.getMovieSearch(this.searchTerm, this.moviePage));
     this.moviePage++;
   }
   
   loadShows() {
-    this.searchService.getShowSearch(this.searchTerm, this.showPage).subscribe({
-      next: (data : ShowResult) => data.results.forEach(show => this.shows.push({
-        id: show.id,
-        name: show.name,
-        first_air_date: show.first_air_date,
-        genres: null,
-        vote_average: show.vote_average,
-        overview: show.overview,
-        num_of_episodes: null,
-        num_of_seasons: null,
-        poster_path: show.poster_path == null ? "./assets/images/poster_placeholder.png" : Constants.apiPosterUrl + show.poster_path,
-        seasons: null
-      })),
-      error: (error) => console.error(error)
-    });
+    this.shows = this.observableFunctions.concatObservableResults(this.shows, this.searchService.getShowSearch(this.searchTerm, this.showPage));
     this.showPage++;
   }
   
   loadPeople() {
-    this.searchService.getPersonSearch(this.searchTerm, this.personPage).subscribe({
-      next: (data : PersonResult) => data.results.forEach(person => this.people.push({
-        id: person.id,
-        name: person.name,
-        gender: person.gender == 1 ? 'woman' : 'man',
-        birthday: null,
-        biography: null,
-        place_of_birth: null,
-        profile_path: person.profile_path == null ? "./assets/images/person_placeholder.jpeg" : Constants.apiProfileUrl + person.profile_path
-      })),
-      error: (error) => console.error(error)
-    });
+    this.people = this.observableFunctions.concatObservableResults(this.people, this.searchService.getPersonSearch(this.searchTerm, this.personPage));
     this.personPage++;
   }
 }

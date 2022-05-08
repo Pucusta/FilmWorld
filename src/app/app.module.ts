@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
@@ -24,10 +25,10 @@ import { ShowService } from './services/show.service';
 import { ShowDetailsComponent } from './show-details/show-details.component';
 import { ShowDetailsPageComponent } from './show-details-page/show-details-page.component';
 import { EpisodeDetailsComponent } from './episode-details/episode-details.component';
-import { FormsModule } from '@angular/forms';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SearchService } from './services/search.service';
 import { SaveService } from './services/save.service';
+import { ObservableFunctions } from './services/functions';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { SaveService } from './services/save.service';
     ShowDetailsComponent,
     ShowDetailsPageComponent,
     EpisodeDetailsComponent,
-    SearchPageComponent
+    SearchPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +63,8 @@ import { SaveService } from './services/save.service';
     PersonService,
     ShowService,
     SearchService,
-    SaveService
+    SaveService,
+    ObservableFunctions
   ],
   bootstrap: [AppComponent]
 })
