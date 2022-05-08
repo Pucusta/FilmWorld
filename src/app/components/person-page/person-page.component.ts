@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Person } from '../models/person.type';
-import { Result } from '../models/result.type';
-import { ObservableFunctions } from '../services/functions';
-import { PersonService } from '../services/person.service';
+import { Person } from '../../models/person.type';
+import { Result } from '../../models/result.type';
+import { ObservableFunctions } from '../../services/functions';
+import { PersonService } from '../../services/person.service';
 
 @Component({
   selector: 'app-person-page',

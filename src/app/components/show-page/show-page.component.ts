@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Result } from '../models/result.type';
-import { Show } from '../models/show.type';
-import { ObservableFunctions } from '../services/functions';
-import { ShowService } from '../services/show.service';
+import { Result } from '../../models/result.type';
+import { Show } from '../../models/show.type';
+import { ObservableFunctions } from '../../services/functions';
+import { ShowService } from '../../services/show.service';
 
 @Component({
   selector: 'app-show-page',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Movie } from '../models/movie.type';
-import { Person } from '../models/person.type';
-import { Show } from '../models/show.type';
-import { SaveService } from '../services/save.service';
+import { Movie } from '../../models/movie.type';
+import { Person } from '../../models/person.type';
+import { Show } from '../../models/show.type';
+import { SaveService } from '../../services/save.service';
 
 @Component({
   selector: 'app-home',

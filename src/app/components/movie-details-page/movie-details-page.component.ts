@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Credits } from '../models/credits.type';
-import { Movie, MovieCast } from '../models/movie.type';
-import { Result } from '../models/result.type';
-import { Constants } from '../services/constants';
-import { ObservableFunctions } from '../services/functions';
-import { MovieService } from '../services/movie.service';
-import { SaveService } from '../services/save.service';
+import { Credits } from '../../models/credits.type';
+import { Movie, MovieCast } from '../../models/movie.type';
+import { Result } from '../../models/result.type';
+import { Constants } from '../../services/constants';
+import { ObservableFunctions } from '../../services/functions';
+import { MovieService } from '../../services/movie.service';
+import { SaveService } from '../../services/save.service';
 
 @Component({
   selector: 'app-movie-details-page',

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Movie } from '../models/movie.type';
-import { Person } from '../models/person.type';
-import { Result } from '../models/result.type';
-import { Show } from '../models/show.type';
-import { Constants } from '../services/constants';
-import { ObservableFunctions } from '../services/functions';
-import { SearchService } from '../services/search.service';
+import { Movie } from '../../models/movie.type';
+import { Person } from '../../models/person.type';
+import { Result } from '../../models/result.type';
+import { Show } from '../../models/show.type';
+import { Constants } from '../../services/constants';
+import { ObservableFunctions } from '../../services/functions';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-search-page',

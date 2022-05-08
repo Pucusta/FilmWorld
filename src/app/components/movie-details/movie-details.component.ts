@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Constants } from '../services/constants';
+import { Constants } from '../../services/constants';
 
 @Component({
   selector: 'movie-details',

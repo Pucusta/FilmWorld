@@ -32,13 +32,6 @@
     border-bottom: 1px solid;
     padding-bottom: 4px;
 }
-.showlist {
-    display: flex;
-    color: grey;
-    padding: 15px;
-    flex-wrap: wrap;
-    padding-top: 0;
-}
 .showlist-breadcrumb {
     font-family: system-ui;
     display: flex;

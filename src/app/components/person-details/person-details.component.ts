@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Constants } from '../services/constants';
+import { Constants } from '../../services/constants';
 
 @Component({
   selector: 'person-details',
